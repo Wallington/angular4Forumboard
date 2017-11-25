@@ -1,0 +1,36 @@
+<div fxLayoutWrap fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" >
+      <mat-card [@hideProfileAnimation]="hideProfileState" (click)="SelectedProfileAction(account)" fxFlex="25%" fxFlex.xs="100%" class="profile profileButton" *ngFor="let account of accounts">
+            <img class="profileImg" src="{{account.avatar}}">
+            <span class="profileName">{{account.name}}</span>
+            <span class="profileRank">{{account.rank}}</span>
+      </mat-card>
+</div>
+<div fxLayout="column" [@hideBotTestAnimation]="hideTestOfBotState">
+      <mat-toolbar color="primary">
+            <span>Are you not a real bot?</span>
+            <span fxFlex></span>
+            <button mat-raised-button color="warn" (click)="ToggleMenu()"><i class="fa fa-left-arrow"></i>Back</button>
+      </mat-toolbar>
+      <mat-card>
+            <mat-card-content>
+                  <div fxLayout="row" fxLayout.xs="column">
+                        <div class="soloProfile" fxFlex="25">
+                              
+                              <img [src]="selectedProfile.avatar">
+                              
+                              <div fxLayout="row" >
+                                    <div class="soloName" fxFlex="50">
+                                          <span class="mat-title">{{selectedProfile.name}}</span>
+                                    </div>
+                                    <div class="soloRank" fxFlex="50">
+                                          <span class="mat-caption">Rank: {{selectedProfile.rank}}</span>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="tester" fxFlex>
+                             <div id="googleTester"></div> 
+                        </div>
+                  </div>
+            </mat-card-content>
+      </mat-card>
+</div>
