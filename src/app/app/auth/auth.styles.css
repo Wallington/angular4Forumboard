@@ -1,0 +1,41 @@
+
+
+.profile 
+{
+    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profileImg
+{
+    height: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profileName
+{
+    display: block;
+     text-align: center;
+     font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.005em;
+    padding-left: 5px;
+    padding-right: 5px; 
+}
+
+.profileRank
+{
+    display: block;
+     text-align: center;
+     font-size: 10px;
+    letter-spacing: 0.005em;
+}
+
+.profileButton
+{
+    cursor: pointer;
+}

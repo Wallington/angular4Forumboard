@@ -142,15 +142,7 @@ export class AuthComponent
 
     RenderCaptcha()
     {
-        //get the google captia to render
-        grecaptcha.render
-        ( 
-            'googleTester',
-            {
-                'sitekey': '6LcNriwUAAAAALTx_6B2nM69nZRYKfAPjZRv3lf8'
-            }
-        );
-        this.captchaRender = true;
+       
     }
     
 

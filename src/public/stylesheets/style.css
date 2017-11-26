@@ -1,0 +1,41 @@
+@import '../stylesheets/theme';
+
+.primary
+{
+    background-color: rgb(63, 81, 181);
+    color: rgba(255,255,255,0.87);
+}
+ 
+.bgRed
+{
+    background-color: rgb(180, 0, 0);
+}
+
+.bgGreen
+{
+    background-color: rgb(0, 180, 0);
+}
+
+.bgBlue
+{
+    background-color: rgb(0, 0, 180);
+}
+
+
+.flexSpacer
+{
+    flex: 1 1 auto;
+}
+
+body
+{
+    z-index: 0;
+}
+
+md-dialog-container
+{
+    float: left;
+    margin: auto;
+    position: block;
+    z-index: 10;
+}

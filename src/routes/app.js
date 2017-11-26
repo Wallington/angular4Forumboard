@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 //var reCaptcha = require('recaptcha2');
-var request = require('request');
+var RP = require('request-promise');
+var cors = require('cors');
+router.use(cors());
 
 //connect to the db
 var mongoose = require('mongoose');
@@ -15,29 +17,28 @@ var Forum = mongoose.model('Forum');
 var Thread = mongoose.model('Thread');
 var Post = mongoose.model('Post');
 
+const gCaptchaSecret = '6LcNriwUAAAAANscAG0T05pInNp6Q3PMh1QLtnoe';
 
-router.get('/auth/valdate/:gCaptcha', function(req,res,next)
+router.get('/auth/vaildate', function(req,res,next)
 {
-    //url set the values and codes for the valdating
-    var url = 'https://www.google.com/recaptcha/api/siteverify?secret=6LcNriwUAAAAANscAG0T05pInNp6Q3PMh1QLtnoe&response=' + req.params.gCaptcha;  
-    //requseting to valdate the google response then send back as JSON to caller
-    request
-   (
-       {
-            method: 'POST',
-            url: url
-       }
-       ,function(error, response, body)
-       {
-           if(error)
-            {
-                console.log(['request-error', error.toString()]);
-            }
+    
+    const options =
+    {
+        method: 'POST',
+        url: 'https://www.google.com/recaptcha/api/siteverify',
+        qs: 
+        {
+            gCaptchaSecret,
+            response: req.query.token
+        },
+        json : true
+    };
 
-            res.json(body);
-            res.end();
-       }
-   )
+    RP(options)
+    .then(response => res.json(response))
+    .catch(() => {}); 
+    
+    next();
    
 });
 //create the session cookies

@@ -1,0 +1,54 @@
+<mat-toolbar class="small">
+        {{ForumBoardName}} > Topics
+</mat-toolbar>
+<div class="margin-20">
+        <mat-toolbar class=" primary">
+                Topics
+                <span class="flexSpacer"></span>
+                <button mat-button (click)="OpenNewTopicModel()">Create Topic</button>
+        </mat-toolbar>
+        <mat-card>
+            <mat-table #table [dataSource]="dataSource" matSort >
+                <!-- thread Name -->
+                <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Topic Name </mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+                </ng-container>
+
+                <!-- author who create this topic -->
+                <ng-container matColumnDef="authorName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Created By </mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.authorName}}%</mat-cell>
+                </ng-container>
+                
+                <!-- When this topic was created -->
+                <ng-container matColumnDef="createdDate">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Created By </mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.createdDate}}</mat-cell>
+                </ng-container>
+
+                <!-- Lastest Date when most recenent post on this topic -->
+                <ng-container matColumnDef="recenentPostDate">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Lastest Post Date </mat-header-cell>
+                        <mat-cell *matCellDef="let row" >{{row.recenentPostDate}}</mat-cell>
+                </ng-container>
+                
+                <!-- number of post in this topic -->
+                <ng-container matColumnDef="postCount">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Number of Posts </mat-header-cell>
+                        <mat-cell *matCellDef="let row" >{{row.postCount}}</mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="SelectThread(row.name)"></mat-row>
+
+            </mat-table>
+            
+            
+        </mat-card>
+        <mat-radio-button>x</mat-radio-button>
+        <mat-toolbar class=" primary topMargin-20">
+                <span class="flexSpacer"></span>
+                <button mat-button (click)="OpenNewTopicModel()">Create Topic</button>
+        </mat-toolbar>
+</div>
