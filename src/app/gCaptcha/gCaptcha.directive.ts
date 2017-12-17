@@ -1,39 +1,44 @@
 import 
-{ 
-    Directive, 
-    Input, 
-    OnInit, 
-    AfterViewInit,
-    NgZone,
-    Injector
-} from "@angular/core";
-
-import { ElementDef } from "@angular/core/src/view";
-import 
 {
-    ControlValueAccessor,
-    FormControl,
-    NgControl
-} from "@angular/forms";
-import { Validators } from "@angular/forms/src/validators";
+    Directive,
+    Input,
+    OnInit,
+    NgZone,
+    HostListener,
+    
+} from '@angular/core';
 
 
+import { Http } from '@angular/http';
+
+//importing the Auth Component 
+import { AuthComponent } from '../auth/auth.component';
+
+
+declare const grecaptcha : any;
+
+declare global 
+{
+  interface Window 
+  {
+    grecaptcha : any;
+    GCaptchaLoad : () => void
+  }
+}
 
 export interface GCaptchaConfig
 {
     theme?: 'dark' | 'light';
     type?: 'audio' | 'image';
     size?: 'compact' | 'normal';
-    tabIndex?: number
+    tabindex? : number;
 }
-
-
 
 @Directive
 ({
-    selector: '[gCaptcha]'
+    selector: '[appGoogleReCaptcha]'
 })
-export class GCaptchaDirective implements OnInit, AfterViewInit, ControlValueAccessor 
+export class GCaptchaDirective implements OnInit
 {
     /*
     *   We have 3 inputs Public Key, a Config, and optional User Language
@@ -43,87 +48,53 @@ export class GCaptchaDirective implements OnInit, AfterViewInit, ControlValueAcc
     @Input() config: GCaptchaConfig = {};
     @Input() lang: string;
 
+    @HostListener('document:submit', ['$event']) onsubmit()
+    {
+        this.OnSubmit();
+    }
 
-    private widgetID: number;
-    private OnChange : (value : string) => void;
-    private OnTouched : (value: string) => void;
-    private control : FormControl
+    public widgetID;
+    private token : string;
 
-    constructor 
+    constructor
     (
-        private element: ElementDef,
+        private http : Http,
         private ngZone : NgZone,
-        private injector: Injector
-    )
-    {}
+        private AuthComponent: AuthComponent
+    ){}
 
     ngOnInit()
     {
-        this.RegisterGCaptchaCallback();
         this.AddScript();
-    }
-
-    ngAfterViewInit()
-    {
-        this.control = this.injector.get(NgControl).control;
-        this.SetValidator();
-    }
-
-    private SetValidator()
-    {
-        this.control.setValidators(Validators.required);
-        this.control.updateValueAndValidity();
-    }
-
-    writeValue(obj: any) : void{}
-
-    registerOnChange(fn: any): void
-    {
-        this.OnChange = fn;
-    }
-
-    registerOnTouched(fn: any): void
-    {
-        this.OnTouched = fn;
-    }
-
-    OnExpired()
-    {
-        this.ngZone.run(()=>
-        {
-            this.OnChange(null);
-            this.OnTouched(null);
-        });
-    }
-
-    OnSuccess()
-    {
-        this.ngZone.run(() =>
-        {
-           this.OnChange(token);
-           this.OnTouched(token);  
-        });
+        this.RegisterGCaptchaCallback();
     }
 
     RegisterGCaptchaCallback()
     {
-        window.gCaptchaLoad = () =>
+        const localConfig = 
         {
-            const config =
-            {
-                ...this.config,
-                'sitekey': this.key,
-                'callback': this.OnSuccess.bind(this),
-                'expired-callback': this.OnExpired.blind(this)
-            }
-        };
-
-        this.widgetID = this.render(this.element.nativeElement, config);
+            
+            ...this.config,
+            'sitekey': this.key,
+            'callback': this.OnSuccess.bind(this),
+            'expired-callback': this.OnExpired.bind(this)
+        }
+        window.GCaptchaLoad = () =>
+        {
+            this.widgetID =  this.Render(document.getElementById('gCaptchaZone'), localConfig);
+        }
+        
     }
+    
+    
 
-    private render(element: HTMLElement, config) : number
+    /*
+    * We want to render the google captcha funtion "grecaptcha" 
+    * We want to return the ID of the new render widget
+    */
+    private Render(element: HTMLElement, RLocalConfig) : Number
     {
-        return grecaptcha.render(element, config);
+        return grecaptcha.render(element,RLocalConfig);
     }
 
     /*
@@ -135,7 +106,7 @@ export class GCaptchaDirective implements OnInit, AfterViewInit, ControlValueAcc
         
         const lang = this.lang ? '&hl=' + this.lang : '';
 
-        script.src= `https://www.google.com/recaptcha/api.js?onload=gCaptchaLoad&render=explicit${lang}`;
+        script.src= `https://www.google.com/recaptcha/api.js?onload=GCaptchaLoad&render=explicit${lang}`;
 
         script.async = true;
 
@@ -143,15 +114,75 @@ export class GCaptchaDirective implements OnInit, AfterViewInit, ControlValueAcc
         
         document.body.appendChild(script);
     }
-}
 
-declare const grecaptcha : any;
+   /*
+    *   On this function call we want 
+    */
+    OnSuccess( token : string)
+    {
 
-declare global 
-{
-  interface Window 
-  {
-    grecaptcha : any;
-    gCaptchaLoad : () => void
-  }
+        this.ngZone.run(() =>
+        {
+            this.token = token;
+        });
+    }
+    
+    /*
+    *   On this function call we want stop any Event Emition
+    */
+    OnExpired()
+    {
+        this.ngZone.run(() =>
+        {
+            this.token = 'timeout';
+        });
+        
+    }
+
+    /*
+    *   On Click of submit from the auth page we want valdeate the ReCaptcha from google and animate the thinking time
+    */
+    OnSubmit()
+    {
+        this.AuthComponent.hideLoadingMessage = 'off';
+        this.AuthComponent.hideErrorMessage = 'on';
+        this.AuthComponent.hideGCaptcha = 'on';
+        if(this.token != 'timeout')
+        {
+            
+            this.http.get('http://localhost:8081/auth/valdate/' + this.token).subscribe(data =>
+            {
+                if(data)
+                {
+                    setTimeout(() =>
+                    {
+                        
+                            this.AuthComponent.hideLoadingMessage = 'on';
+                            this.AuthComponent.hideErrorMessage = 'on';
+                            this.AuthComponent.hideGCaptcha = 'on';
+                            this.AuthComponent.hideBotErrorMessage = 'on';
+                            this.AuthComponent.hideSuccessMessage = 'off';
+                        
+                        
+                    }, 3000);
+                    
+                    
+                }
+                else
+                {
+                    this.AuthComponent.hideLoadingMessage = 'on';
+                    this.AuthComponent.hideErrorMessage = 'on';
+                    this.AuthComponent.hideGCaptcha = 'on';
+                    this.AuthComponent.hideBotErrorMessage = 'off';
+                }
+            })
+        }
+        else
+        {
+            this.AuthComponent.hideLoadingMessage = 'on';
+            this.AuthComponent.hideErrorMessage = 'off';
+            this.AuthComponent.hideGCaptcha = 'off';
+        }
+    }
+    
 }

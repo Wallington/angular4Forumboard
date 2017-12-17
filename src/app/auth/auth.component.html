@@ -13,7 +13,7 @@
       </mat-toolbar>
       <mat-card>
             <mat-card-content>
-                  <div fxLayout="row" fxLayout.xs="column">
+                  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center">
                         <div class="soloProfile" fxFlex="25">
                               
                               <img [src]="selectedProfile.avatar">
@@ -27,9 +27,15 @@
                                     </div>
                               </div>
                         </div>
-                        <div class="tester" fxFlex>
-                             <div id="googleTester"></div> 
-                        </div>
+                        <form fxLayout="column" fxLayoutAlign="center center">
+                                    <mat-toolbar [@hideSuccessMessage]="hideSuccessMessage" class="alert alert-success">Successful!</mat-toolbar>
+                                    <mat-toolbar [@hideErrorMessage]="hideErrorMessage" class="alert alert-danger">Validation Has Been Time out!</mat-toolbar>
+                                    <mat-toolbar [@hideBotErrorMessage]="hideBotErrorMessage" class="alert alert-danger">Error! Robot Has Been Dectected!</mat-toolbar>
+                                    <mat-spinner [@hideLoadingMessage]="hideLoadingMessage"></mat-spinner>    
+                                    <div id="gCaptchaZone" [@hideGCaptcha]="hideGCaptcha"  appGoogleReCaptcha key="6LcNriwUAAAAALTx_6B2nM69nZRYKfAPjZRv3lf8" ></div> <!-- NEED TO REPLACE KEY ONCE THIS IS LIVE -->
+                                    <button type="submit" [@hideGCaptcha]="hideGCaptcha" mat-raised-button color="warn" >Submit</button>  
+                                                         
+                        </form>
                   </div>
             </mat-card-content>
       </mat-card>

@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { appRouting } from './app.routing';
 import 
 {
@@ -45,6 +45,9 @@ import
 //loading in Components
 import { MainComponent } from "./main/main.component";
 import { AuthComponent } from './auth/auth.component';
+import { GCaptchaDirective } from './gCaptcha/gCaptcha.directive';
+
+
 //import { threadBoardComponent } from './threadBoard/threadBoard.component';
 //import { postBoardComponent } from './postBoard/postBoard.component';
 //import { dbComponent } from './db/db.component';
@@ -56,13 +59,13 @@ import { AuthComponent } from './auth/auth.component';
     declarations: 
     [
         MainComponent,
-        AuthComponent
-       
+        AuthComponent,
+        GCaptchaDirective
     ],
     imports: 
     [
         BrowserModule,
-        HttpClientModule,
+        HttpModule,
         FormsModule,
         appRouting,
         FlexLayoutModule,
@@ -96,7 +99,8 @@ import { AuthComponent } from './auth/auth.component';
         MatTableModule,
         MatTabsModule,
         MatToolbarModule,
-        MatTooltipModule
+        MatTooltipModule,
+        ReactiveFormsModule
     ],
     exports: 
     [
@@ -139,6 +143,8 @@ import { AuthComponent } from './auth/auth.component';
     entryComponents:
     [
         AuthComponent,
+       
+        
     ],
     providers:
     [

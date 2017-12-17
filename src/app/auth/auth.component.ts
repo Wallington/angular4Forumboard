@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import 
+{
+    Component
+} from '@angular/core';
 //import { HttpClient } from '@angular/common/http'
 import 
 {
@@ -8,6 +11,8 @@ import
     animate,
     transition
 } from '@angular/animations'
+
+
 
 
 
@@ -49,18 +54,104 @@ import
           })),
           transition('off => on', animate('600ms ease-out')),
           transition('on => off', animate('300ms ease-in'))
+        ]),
+        trigger ('hideSuccessMessage',
+        [
+            state('off', style
+            ({
+                opacity: '1',
+                transform: 'scale(1)'
+            })),
+            state('on', style
+            ({
+               opacity: '0',
+               display: 'none',
+               transform: 'scale(0)'
+            })),
+            transition('off => on', animate('600ms ease-out')),
+            transition('on => off', animate('300ms ease-in'))
+        ]),
+        trigger ('hideErrorMessage',
+        [
+            state('off', style
+            ({
+                opacity: '1',
+                transform: 'scale(1)'
+            })),
+            state('on', style
+            ({
+               opacity: '0',
+               display: 'none',
+               transform: 'scale(0)'
+            })),
+            transition('off => on', animate('600ms ease-out')),
+            transition('on => off', animate('300ms ease-in'))
+        ]),
+        trigger ('hideBotErrorMessage',
+        [
+            state('off', style
+            ({
+                opacity: '1',
+                transform: 'scale(1)'
+            })),
+            state('on', style
+            ({
+               opacity: '0',
+               display: 'none',
+               transform: 'scale(0)'
+            })),
+            transition('off => on', animate('600ms ease-out')),
+            transition('on => off', animate('300ms ease-in'))
+        ]),
+        trigger ('hideLoadingMessage',
+        [
+            state('off', style
+            ({
+                opacity: '1'
+            })),
+            state('on', style
+            ({
+               opacity: '0',
+               display: 'none'
+               
+            })),
+            transition('off => on', animate('600ms ease-out')),
+            transition('on => off', animate('300ms ease-in'))
+        ]),
+        trigger ('hideGCaptcha',
+        [
+            state('off', style
+            ({
+                opacity: '1',
+                transform: 'scale(1)'
+            })),
+            state('on', style
+            ({
+               opacity: '0',
+               display: 'none',
+               transform: 'scale(0)'
+            })),
+            transition('off => on', animate('600ms ease-out')),
+            transition('on => off', animate('300ms ease-in'))
         ])
+
     ]
 })
 
 export class AuthComponent
 {
+         
+    public hideProfileState = 'off'; // show the each of the account to log into
+    public hideTestOfBotState = 'on'; //show the google reCaptcha and the profile they selected
+    public hideSuccessMessage = 'on'; //show the successful message
+    public hideErrorMessage  = 'on'; //show the validation has time out 
+    public hideBotErrorMessage = 'on'; //show that the validation detected a Robot
+    public hideLoadingMessage = 'on'; //show the loading of the validation
+    public hideGCaptcha = 'off'; //show the google reCaptcha and submit button
+   
+    
 
-    
-    public hideProfileState = 'off';
-    public hideTestOfBotState = 'on';
-    
-    private selectedProfile =
+    public selectedProfile =
     {
         "email":"",
         "name":"",
@@ -137,23 +228,13 @@ export class AuthComponent
             "rank": "Moderator"
         }
     ]
-
-    private captchaRender = false;
-
-    RenderCaptcha()
-    {
-       
-    }
-    
+   
 
     SelectedProfileAction(localSelectedProfile)
     {
         this.selectedProfile = localSelectedProfile;
         this.hideProfileState = this.hideProfileState === 'on' ? 'off' : 'on';
         this.hideTestOfBotState = this.hideTestOfBotState === 'on' ? 'off' : 'on';
-        
-        if(!this.captchaRender)
-            this.RenderCaptcha();
     }
 
     ToggleMenu()
@@ -161,6 +242,10 @@ export class AuthComponent
         this.hideProfileState = this.hideProfileState === 'on' ? 'off' : 'on';
         this.hideTestOfBotState = this.hideTestOfBotState === 'on' ? 'off' : 'on';
     }
+
+    
+    
+    
 }
 
 
