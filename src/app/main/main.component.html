@@ -1,7 +1,13 @@
 <mat-toolbar color="primary" class="mat-elevation-z5" id="mainBanner" >
         <h1>Angular 4 Forum Board</h1>
         <span fxFlex></span>
-        
+        <div [hidden]="hideMainMenu">
+            {{profile.name}}
+            <img class="avatar" [matMenuTriggerFor]="mainMenu" [src]="profile.avatar">
+            <mat-menu #mainMenu="matMenu">
+                <button mat-menu-item class="alert alert-danger" (click)="SignOff()">Sign Out</button>
+            </mat-menu>
+        </div>
      </mat-toolbar>
      
          <div id="contentBody">

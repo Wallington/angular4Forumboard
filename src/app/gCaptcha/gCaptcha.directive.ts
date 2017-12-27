@@ -8,12 +8,14 @@ import
     
 } from '@angular/core';
 
-
+//importing the http module 
 import { Http } from '@angular/http';
-
+//importing the angular 4 plug in for cookies
+import { CookieService } from 'ngx-cookie'
 //importing the Auth Component 
 import { AuthComponent } from '../auth/auth.component';
-
+//import the router module
+import { Router } from '@angular/router'
 
 declare const grecaptcha : any;
 
@@ -21,7 +23,8 @@ declare global
 {
   interface Window 
   {
-    grecaptcha : any;
+      //we are declear outside code function that later will be load on page render
+    grecaptcha : any; 
     GCaptchaLoad : () => void
   }
 }
@@ -60,7 +63,9 @@ export class GCaptchaDirective implements OnInit
     (
         private http : Http,
         private ngZone : NgZone,
-        private AuthComponent: AuthComponent
+        private AuthComponent: AuthComponent,
+        private CookieServ: CookieService,
+        private Router : Router
     ){}
 
     ngOnInit()
@@ -162,8 +167,27 @@ export class GCaptchaDirective implements OnInit
                             this.AuthComponent.hideGCaptcha = 'on';
                             this.AuthComponent.hideBotErrorMessage = 'on';
                             this.AuthComponent.hideSuccessMessage = 'off';
-                        
-                        
+
+                            this.CookieServ.putObject
+                            (
+                                'profile',
+                                this.AuthComponent.selectedProfile,
+                                {expires: new Date(Date.now() + 3600000)}
+
+                            );
+                            this.CookieServ.put
+                            (
+                                'session',
+                                "true",
+                                {expires: new Date(Date.now() + 3600000)}
+                            );
+                            
+                            setTimeout(()=>
+                            {
+                                this.Router.navigate(['/threadboard', 'Main Board'])
+                            }, 2000);
+                            
+
                     }, 3000);
                     
                     

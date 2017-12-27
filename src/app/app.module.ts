@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { appRouting } from './app.routing';
+import { CookieModule } from 'ngx-cookie'
 import 
 {
         MatAutocompleteModule,
@@ -46,8 +47,7 @@ import
 import { MainComponent } from "./main/main.component";
 import { AuthComponent } from './auth/auth.component';
 import { GCaptchaDirective } from './gCaptcha/gCaptcha.directive';
-
-
+import { ThreadBoardComponent } from './threadBoard/threadBoard.component';
 //import { threadBoardComponent } from './threadBoard/threadBoard.component';
 //import { postBoardComponent } from './postBoard/postBoard.component';
 //import { dbComponent } from './db/db.component';
@@ -60,7 +60,8 @@ import { GCaptchaDirective } from './gCaptcha/gCaptcha.directive';
     [
         MainComponent,
         AuthComponent,
-        GCaptchaDirective
+        GCaptchaDirective,
+        ThreadBoardComponent
     ],
     imports: 
     [
@@ -100,7 +101,8 @@ import { GCaptchaDirective } from './gCaptcha/gCaptcha.directive';
         MatTabsModule,
         MatToolbarModule,
         MatTooltipModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        CookieModule.forRoot()
     ],
     exports: 
     [
@@ -143,13 +145,15 @@ import { GCaptchaDirective } from './gCaptcha/gCaptcha.directive';
     entryComponents:
     [
         AuthComponent,
-       
+        ThreadBoardComponent,
+
         
     ],
     providers:
     [
         AuthComponent,
-        
+        ThreadBoardComponent,
+
     ]
 })
 export class AppModule 

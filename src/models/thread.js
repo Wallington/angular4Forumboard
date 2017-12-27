@@ -4,24 +4,20 @@ var Schema = mongoose.Schema;
 
 var schema = new Schema
 ({
-    f_id: 
-    {
-        type: String          
-    },
-    name : 
+    name:
     {
         type: String,
-        required: true,
-    },
-    authorName:
+        required : true
+    }, 
+    authorName: 
     {
         type: String
     },
-    createdDate:
+    createdDate: 
     {
         type: String
     },
-    recenentPostDate:
+    lastedPostDate:
     {
         type: String
     },
@@ -29,6 +25,11 @@ var schema = new Schema
     {
         type: String
     },
+    posts:
+    [{
+        type: Schema.Types.ObjectId,
+        ref: 'Post'
+    }],
     beenRemove:
     {
         type: Boolean,

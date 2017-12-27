@@ -1,6 +1,7 @@
 import 
 {
-    Component
+    Component,
+    OnInit
 } from '@angular/core';
 //import { HttpClient } from '@angular/common/http'
 import 
@@ -12,7 +13,7 @@ import
     transition
 } from '@angular/animations'
 
-
+import { MainComponent } from '../main/main.component'
 
 
 
@@ -138,7 +139,7 @@ import
     ]
 })
 
-export class AuthComponent
+export class AuthComponent implements OnInit
 {
          
     public hideProfileState = 'off'; // show the each of the account to log into
@@ -150,6 +151,10 @@ export class AuthComponent
     public hideGCaptcha = 'off'; //show the google reCaptcha and submit button
    
     
+    constructor
+    (
+        private MainComp: MainComponent
+    ){}
 
     public selectedProfile =
     {
@@ -229,6 +234,10 @@ export class AuthComponent
         }
     ]
    
+    ngOnInit()
+    {
+        this.MainComp.hideMainMenu = true;
+    }
 
     SelectedProfileAction(localSelectedProfile)
     {

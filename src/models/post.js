@@ -1,17 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
 var schema = new Schema
 ({
-    f_id:
-    {
-        type: String
-    },
-    t_id:
-    {
-        type: String
-    },
     authorName: 
     {
         type: String
