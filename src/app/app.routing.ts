@@ -9,8 +9,9 @@ import
 import { AuthComponent } from './auth/auth.component';
 import { MainComponent } from './main/main.component';
 import { ThreadBoardComponent } from './threadBoard/threadBoard.component';
+import { DBStarterComponent } from './dbStarter/dbStarter.component';
 //import { postBoardComponent } from './postBoard/postBoard.component';
-//import { dbComponent } from './db/db.component';
+
 //define our SPA routes to what component want show to the user
 const appRoutes: Routes =
 [
@@ -23,17 +24,18 @@ const appRoutes: Routes =
         component: MainComponent
     },
     {
-        path: 'threadboard/:forumBoardName',
+        path: 'threadboard/:forumboardID',
         component: ThreadBoardComponent   
+    },
+    {
+        path: 'db',
+        component: DBStarterComponent
     }/*,
     {
         path: 'postBoard/:forumBoardName/:threadName',
         component: postBoardComponent
     },
-    {
-        path: 'db',
-        component: dbComponent
-    }*/,
+    */,
     {
         path: "",
         redirectTo: '/',

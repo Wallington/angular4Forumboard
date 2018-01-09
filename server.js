@@ -9,7 +9,7 @@ var mongoose = require('mongoose');
 
 var app = express();
 //calling mongoose to connect to mongodb
-if(!mongoose.connect('localhost:27017/angular4Forum'))
+if(!mongoose.connect('localhost:27017/angular4Forumboard'))
 {
     console.log('ERROR!');
 }

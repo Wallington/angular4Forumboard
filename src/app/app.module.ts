@@ -48,9 +48,9 @@ import { MainComponent } from "./main/main.component";
 import { AuthComponent } from './auth/auth.component';
 import { GCaptchaDirective } from './gCaptcha/gCaptcha.directive';
 import { ThreadBoardComponent } from './threadBoard/threadBoard.component';
+import { DBStarterComponent } from './dbStarter/dbStarter.component';
 //import { threadBoardComponent } from './threadBoard/threadBoard.component';
 //import { postBoardComponent } from './postBoard/postBoard.component';
-//import { dbComponent } from './db/db.component';
 //import { TextDialogComponent } from './textDialog/textDialog.component';
 
 @NgModule
@@ -61,7 +61,8 @@ import { ThreadBoardComponent } from './threadBoard/threadBoard.component';
         MainComponent,
         AuthComponent,
         GCaptchaDirective,
-        ThreadBoardComponent
+        ThreadBoardComponent,
+        DBStarterComponent
     ],
     imports: 
     [
@@ -146,14 +147,14 @@ import { ThreadBoardComponent } from './threadBoard/threadBoard.component';
     [
         AuthComponent,
         ThreadBoardComponent,
-
+        DBStarterComponent,
         
     ],
     providers:
     [
         AuthComponent,
         ThreadBoardComponent,
-
+        DBStarterComponent,
     ]
 })
 export class AppModule 

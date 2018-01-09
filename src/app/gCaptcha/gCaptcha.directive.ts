@@ -184,7 +184,20 @@ export class GCaptchaDirective implements OnInit
                             
                             setTimeout(()=>
                             {
-                                this.Router.navigate(['/threadboard', 'Main Board'])
+                                //we want look up the forums for a Main Board or X board if was rename, to which get the ID 
+                                this.http.get('http://localhost:8081/db/get/forumboard/byname/Main Board').subscribe(data =>
+                                {
+                                    if(data != null)
+                                    {
+                                        let forumJSON = JSON.parse(data['_body']);  
+                                        this.Router.navigate(['/threadboard', forumJSON['_id'] ]);
+                                    }
+                                    else
+                                    {
+                                        alert("Please Visit -> http://localhost:yourPortNumber/db/ to generate default forums, threads, and posts into the db");
+                                    } 
+                                })
+                                
                             }, 2000);
                             
 
