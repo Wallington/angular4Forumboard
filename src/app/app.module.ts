@@ -49,9 +49,7 @@ import { AuthComponent } from './auth/auth.component';
 import { GCaptchaDirective } from './gCaptcha/gCaptcha.directive';
 import { ThreadBoardComponent } from './threadBoard/threadBoard.component';
 import { DBStarterComponent } from './dbStarter/dbStarter.component';
-//import { threadBoardComponent } from './threadBoard/threadBoard.component';
-//import { postBoardComponent } from './postBoard/postBoard.component';
-//import { TextDialogComponent } from './textDialog/textDialog.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule
 ({
@@ -62,7 +60,8 @@ import { DBStarterComponent } from './dbStarter/dbStarter.component';
         AuthComponent,
         GCaptchaDirective,
         ThreadBoardComponent,
-        DBStarterComponent
+        DBStarterComponent,
+        DialogComponent
     ],
     imports: 
     [
@@ -148,13 +147,14 @@ import { DBStarterComponent } from './dbStarter/dbStarter.component';
         AuthComponent,
         ThreadBoardComponent,
         DBStarterComponent,
-        
+        DialogComponent
     ],
     providers:
     [
         AuthComponent,
         ThreadBoardComponent,
         DBStarterComponent,
+        DialogComponent
     ]
 })
 export class AppModule 

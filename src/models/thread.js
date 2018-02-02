@@ -4,6 +4,11 @@ var Schema = mongoose.Schema;
 
 var schema = new Schema
 ({
+    f_id: 
+    {
+        type: String,
+        required: true
+    },
     name:
     {
         type: String,
@@ -15,25 +20,27 @@ var schema = new Schema
     },
     createdDate: 
     {
-        type: String
+        type: Date,
+        default: Date.now()
     },
     lastedPostDate:
     {
-        type: String
+        type: Date
     },
     message:
     {
         type: String
     },
-    posts:
-    [{
-        type: Schema.Types.ObjectId,
-        ref: 'Post'
-    }],
     beenRemove:
     {
         type: Boolean,
         default: false
+    },
+    postCount:
+    {
+        type: Number,
+        default: 0
     }
 });
+
 module.exports = mongoose.model('Thread',schema);

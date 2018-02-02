@@ -187,8 +187,10 @@ export class GCaptchaDirective implements OnInit
                                 //we want look up the forums for a Main Board or X board if was rename, to which get the ID 
                                 this.http.get('http://localhost:8081/db/get/forumboard/byname/Main Board').subscribe(data =>
                                 {
-                                    if(data != null)
+                                    // we want test if data body is empty since come from Express and mongodb which rely on body content
+                                    if(data['_body'] !== null)
                                     {
+                                       
                                         let forumJSON = JSON.parse(data['_body']);  
                                         this.Router.navigate(['/threadboard', forumJSON['_id'] ]);
                                     }

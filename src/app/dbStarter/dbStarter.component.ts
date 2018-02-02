@@ -24,4 +24,20 @@ export class DBStarterComponent
     {
         this.HTTP.head('http://localhost:8081/db/check/forumboard/').subscribe();
     }
+    
+    //this cresate a fresh thread data into our threads inside our selected forum 
+    CreateThreads()
+    {
+        this.HTTP.head('http://localhost:8081/db/create/threads/Main Board').subscribe();
+    }
+
+    CheckThreads()
+    {
+        this.HTTP.head('http://localhost:8081/db/check/threads/').subscribe();
+    }
+
+    RemoveThreads()
+    {
+        this.HTTP.head('http://localhost:8081/db/remove/threads/').subscribe();
+    }
 }
