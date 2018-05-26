@@ -1,0 +1,36 @@
+
+<mat-card color="primary" class="margin-20" [@hideSignIn]="hideSignIn">
+    <h3 class="header">Welecome, Please Sign In</h3>
+    <mat-toolbar class="alert alert-danger" [@hideErrorMessage]="hideErrorMessage">
+        {{errorMesssage}}
+    </mat-toolbar>
+    <mat-form-field>
+        <input type="email" matInput placeholder="Email Address" #emailFeild [formControl]="email" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input type="password" matInput placeholder="Password"  #passwordFeild [formControl]="password" required>
+        <mat-error *ngIf="password.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="SignIn()">Sign In</button>
+    <mat-card-footer>
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-evenly center">
+            <button mat-raised-button color="primary">
+                    <i class="fas fa-lg fa-key"></i> Forgot Password?
+            </button>
+            <button mat-raised-button color="primary">
+                    <i class="fas fa-lg fa-user-plus"></i> Create Account
+            </button>
+            <mat-slide-toggle color="primary" [checked]="AudioMode.audioModeConfig.audioMode">
+                Audio Mode
+            </mat-slide-toggle>
+        </div>
+    </mat-card-footer>
+</mat-card>
+
+<mat-card [@hideLoadingMessage]="hideLoadingMessage">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner> 
+        <h3>Searching...</h3>
+    </div>
+</mat-card>

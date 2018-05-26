@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import 'hammerjs';
-import { HttpModule } from '@angular/http';
+
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { appRouting } from './app.routing';
-import { CookieModule } from 'ngx-cookie'
+import { CookieModule } from 'ngx-cookie';
+import { HttpModule } from '@angular/http'
 import 
 {
         MatAutocompleteModule,
@@ -45,11 +46,14 @@ import
 
 //loading in Components
 import { MainComponent } from "./main/main.component";
-import { AuthComponent } from './auth/auth.component';
-import { GCaptchaDirective } from './gCaptcha/gCaptcha.directive';
-import { ThreadBoardComponent } from './threadBoard/threadBoard.component';
-import { DBStarterComponent } from './dbStarter/dbStarter.component';
-import { DialogComponent } from './dialog/dialog.component';
+import { SignInComponent } from './auth/signin/signIn.component';
+import { AudioMode } from './audioMode/audioMode';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ActivityLessonsComponent } from './activityLesson/activityLessons.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { AccountSettingComponent } from './setting/account/account.component';
+import { ActivitySettingComponent } from './setting/activity/activity.component';
+import { MeSpeakSettingComponent } from './setting/meSpeak/meSpeak.component';
 
 @NgModule
 ({
@@ -57,11 +61,13 @@ import { DialogComponent } from './dialog/dialog.component';
     declarations: 
     [
         MainComponent,
-        AuthComponent,
-        GCaptchaDirective,
-        ThreadBoardComponent,
-        DBStarterComponent,
-        DialogComponent
+        SignInComponent,
+        DashboardComponent,
+        ActivityLessonsComponent,
+        AnalyticsComponent,
+        AccountSettingComponent,
+        ActivitySettingComponent,
+        MeSpeakSettingComponent
     ],
     imports: 
     [
@@ -136,7 +142,7 @@ import { DialogComponent } from './dialog/dialog.component';
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule,
+    MatTooltipModule
     ],
     bootstrap: 
     [
@@ -144,17 +150,24 @@ import { DialogComponent } from './dialog/dialog.component';
     ],
     entryComponents:
     [
-        AuthComponent,
-        ThreadBoardComponent,
-        DBStarterComponent,
-        DialogComponent
+        SignInComponent,
+        DashboardComponent,
+        ActivityLessonsComponent,
+        AnalyticsComponent,
+        AccountSettingComponent,
+        ActivitySettingComponent,
+        MeSpeakSettingComponent
     ],
     providers:
     [
-        AuthComponent,
-        ThreadBoardComponent,
-        DBStarterComponent,
-        DialogComponent
+        SignInComponent,
+        AudioMode,
+        DashboardComponent,
+        ActivityLessonsComponent,
+        AnalyticsComponent,
+        AccountSettingComponent,
+        ActivitySettingComponent,
+        MeSpeakSettingComponent
     ]
 })
 export class AppModule 

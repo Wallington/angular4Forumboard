@@ -1,15 +1,103 @@
-<mat-toolbar color="primary" class="mat-elevation-z5" id="mainBanner" >
-        <h1>Angular 4 Forum Board</h1>
+
+<mat-toolbar color="primary" class="mat-elevation-z1" id="mainBanner" >
+        <h1>Flexitutor</h1>
         <span fxFlex></span>
-        <div [hidden]="hideMainMenu">
-            {{profile.name}}
-            <img class="avatar" [matMenuTriggerFor]="mainMenu" [src]="profile.avatar">
-            <mat-menu #mainMenu="matMenu">
-                <button mat-menu-item class="alert alert-danger" (click)="SignOff()">Sign Out</button>
-            </mat-menu>
+        
+</mat-toolbar>
+<mat-drawer-container class="menuContainer" autosize>
+
+    <mat-drawer #drawer opened="true" fxLayout="column" class="menuSidenav" [ngStyle]="menuStyles"  mode="side" *ngIf="showMenu">
+        <div class="account" fxLayout="row" (click)="toggleQucickAccountMenu()">
+            <div class="accountImg">
+                <i class="fas fa-chess-board fa-3x"></i>
+            </div>
+            <div>
+                <b>Welcome</b> <br>
+                {{account.firstName}} <b>{{account.lastName}}</b>
+            </div>
+            
         </div>
-     </mat-toolbar>
-     
-         <div id="contentBody">
-            <router-outlet></router-outlet>
-        </div>   
+        <div *ngIf="showQuickMenu" fxLayout="row" class="menuItem" (click)="('')" fxLayoutAlign="start center" >
+            <div class="icon">
+                <i class="fas fa-sign-out-alt fa-2x"></i>
+            </div>
+            <div class="text">
+                Sign out
+            </div>    
+        </div>
+        <div class="menuItem" *ngIf="showQuickMenu" (click)="SelectPage('accountSetting')"[ngClass]="menu.accountSetting.class" fxLayout="row" fxLayoutAlign="start center" >
+            <div class="icon">
+                <i class="fas fa-user-edit fa-2x"></i>
+            </div>
+            <div class="text">
+                Account Settings
+            </div>
+            <div *ngIf="menu.accountSetting.active" class="arrow"></div>  
+        </div>
+        <div class="menuItem" fxLayout="row" (click)="SelectPage('dashboard')"[ngClass]="menu.dashboard.class" fxLayoutAlign="start center" >
+            <div class="icon">
+                <i class="fas fa-tachometer-alt fa-2x"></i>
+            </div>
+            <div class="text">
+                Dashboard
+            </div>
+            <div *ngIf="menu.dashboard.active" class="arrow"></div>    
+        </div>
+        <div class="menuItem" (click)="SelectPage('activityLessons')" [ngClass]="menu.activityLessons.class" fxLayout="row" fxLayoutAlign="start center" >
+            <div class="icon">
+                <i class="fas fa-comments fa-2x"></i>
+            </div>
+            <div class="text">
+                Activity Lessons
+            </div>
+            <div *ngIf="menu.activityLessons.active" class="arrow"></div>  
+        </div>
+        <div class="menuItem" (click)="SelectPage('analytics')" [ngClass]="menu.analytics.class" fxLayout="row" fxLayoutAlign="start center" >
+            <div class="icon">
+                <i class="fas fa-chart-area fa-2x"></i>
+            </div>
+            <div class="text">
+                Analytics
+            </div>
+            <div *ngIf="menu.analytics.active" class="arrow"></div>  
+        </div>
+        
+        <div class="menuItem" (click)="SelectPage('activitySetting')" [ngClass]="menu.activitySetting.class" fxLayout="row" fxLayoutAlign="start center">
+            <div class="icon">
+                <i class="fas fa-cog fa-2x"></i>
+            </div>
+            <div class="text">
+                Activity Settings
+                
+            </div>
+            <div *ngIf="menu.activitySetting.active" class="arrow"></div>
+        </div>
+        <div class="menuItem" (click)="SelectPage('meSpeakSetting')" [ngClass]="menu.meSpeakSetting.class" fxLayout="row" fxLayoutAlign="start center" >
+            <div class="icon">
+                <i class="fas fa-volume-up fa-2x"></i>
+            </div>
+            <div class="text">
+                Me Speak Settings
+                
+            </div>
+            <div *ngIf="menu.meSpeakSetting.active" class="arrow"></div>
+        </div>
+        <div class="menuItem" fxLayout="row" fxLayoutAlign="start center" (click)="ToggleMenuSize()">
+            <div class="icon">
+                <i *ngIf="this.menuSize == '200px'" class="fas fa-angle-double-left fa-2x"></i>
+                <i *ngIf="this.menuSize == '60px'" class="fas fa-angle-double-right fa-2x"></i>
+            </div>
+            <div class="text">
+                Minimize Menu
+            </div>
+            
+        </div>
+             
+    </mat-drawer>
+
+    <mat-drawer-content [ngStyle]="contentStyles"class="content">
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+
+</mat-drawer-container>
+        

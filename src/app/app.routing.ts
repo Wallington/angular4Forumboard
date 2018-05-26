@@ -6,40 +6,55 @@ import
 } from '@angular/router';
 
 //importing the pages we want load in our SPA
-import { AuthComponent } from './auth/auth.component';
 import { MainComponent } from './main/main.component';
-import { ThreadBoardComponent } from './threadBoard/threadBoard.component';
-import { DBStarterComponent } from './dbStarter/dbStarter.component';
-//import { postBoardComponent } from './postBoard/postBoard.component';
+import { SignInComponent } from './auth/signin/signIn.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ActivityLessonsComponent } from './activityLesson/activityLessons.component';
+import { AnalyticsComponent } from './analytics/analytics.component';
+import { AccountSettingComponent } from './setting/account/account.component';
+import { ActivitySettingComponent } from './setting/activity/activity.component';
+import { MeSpeakSettingComponent } from './setting/meSpeak/meSpeak.component';
 
 //define our SPA routes to what component want show to the user
 const appRoutes: Routes =
 [
-    {
-        path: 'auth',
-        component: AuthComponent
-    },
+    
     {
         path: 'index',
         component: MainComponent
     },
     {
-        path: 'threadboard/:forumboardID',
-        component: ThreadBoardComponent   
-    },
-    {
-        path: 'db',
-        component: DBStarterComponent
-    }/*,
-    {
-        path: 'postBoard/:forumBoardName/:threadName',
-        component: postBoardComponent
-    },
-    */,
-    {
         path: "",
         redirectTo: '/',
         pathMatch: 'full'
+    },
+    {
+        path:  "auth/signin",
+        component: SignInComponent
+    },
+    {
+        path: 'dashboard',
+        component: DashboardComponent
+    },
+    {
+        path: 'activity',
+        component: ActivityLessonsComponent
+    },
+    {
+        path: 'analytics',
+        component: AnalyticsComponent
+    },
+    {
+        path: 'setting/account',
+        component : AccountSettingComponent
+    },
+    {
+        path: 'setting/activity',
+        component : ActivitySettingComponent
+    },
+    {
+        path: 'setting/meSpeak',
+        component : MeSpeakSettingComponent
     }
 ];
 

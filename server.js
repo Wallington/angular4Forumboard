@@ -5,14 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var appRoutes = require('./routes/app');
-var mongoose = require('mongoose');
 
 var app = express();
-//calling mongoose to connect to mongodb
-if(!mongoose.connect('localhost:27017/angular4Forumboard'))
-{
-    console.log('ERROR!');
-}
 
 
 // view engine setup

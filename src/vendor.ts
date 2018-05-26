@@ -13,6 +13,5 @@ import '@angularclass/hmr';
 // Other vendors for example jQuery, Lodash or Bootstrap
 // You can import js, ts, css, sass, ...
 import "@angular/material";
-import "@angular/material/prebuilt-themes/indigo-pink.css";
 import "@angular/flex-layout";
 import "hammerjs";

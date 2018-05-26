@@ -1,0 +1,4 @@
+{
+    "httpAddress": "http://localhost:8081",
+    "dataBaseAddress" : "mongodb://localhost:27017"
+}

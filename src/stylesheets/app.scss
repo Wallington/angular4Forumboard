@@ -1,6 +1,6 @@
 // styles in src/style directory are applied to the whole page
 @import './theme.scss';
-
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500');
 
  
 .bgRed
@@ -23,15 +23,10 @@
     background-color: rgb(0, 180, 180);
 }
 
-.margin-20
-{
-    margin: 20px;
-}
 
-
-body
+.content
 {
-   background-color: #fafafa !important; 
+   background-color: rgb(231,231,231) !important; 
 }
 
 html, body
@@ -39,6 +34,8 @@ html, body
     margin: 0;
     width: 100%;
     height: 100%;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
 }
 #contentBody
 {

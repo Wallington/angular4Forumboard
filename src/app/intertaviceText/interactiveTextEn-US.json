@@ -1,0 +1,126 @@
+{
+    "intro" : 
+    [
+        {
+            "text": "Welcome, Please sign in" 
+        },
+        {
+            "text": "For Audio mode, Press Ctrl A"
+        }
+    ],
+    "online":
+    [
+        {
+            "text": "Audio Mode"
+        },
+        {
+		    "text": "Press f1, for page help"
+	    },
+	    {
+		    "text": "Press f2, to hear the, pages navigation Options"
+        }
+    ],
+    "signIn":
+    {
+        "input":
+        [
+            {
+                "email" : 
+                [{
+                    "text" : "Email Address Input"
+                }]
+            },
+            {
+                "password": 
+                [{
+                    "text": "Password Input"
+                }]
+            }
+        ],
+        "error" :
+        [ 
+            { 
+                "emailReq":
+                [{
+                    "text": "Error, you need an email address"
+                }]
+            },
+            {
+                "emailInval":
+                [{
+                    "text": "Error, your email address is invalid"
+                }]
+            },
+            {
+                "passwordReq":
+                [{
+                    "text": "Error, you need a password"
+                }]
+            },
+            {
+                "emailAndPasswordReq":
+                [{
+                    "text": "Error, you need both email address and a password"
+                }]
+            },
+            {
+                "server":
+                [{
+                    "text": "Error, We can not find your account"
+                }]
+            }
+        ],
+        "help" :
+        [
+            {
+                "text": "Press F2 to hear the, pages navigation Options"
+            },
+            {
+                "text": "Press up arrow, to select the email address input"
+            },
+            {
+                "text": "Press down arrow, to select the password input"
+            },
+            {
+                "text": "Press Enter, to sign in"
+            }
+        ],
+        "navtigationOptions" :
+        [ 
+            {
+                "text" : "Navigation List, Options"
+            },
+            {
+                "text": "Press Alt key and 1 key, to navigate to create account"
+            },
+            {
+                "text": "Press Alt and 2 key, to navigate to loss password"
+            }
+        ]
+    },
+    "pageName":
+    [
+        {
+            "text" : "Sign In"
+        },
+        {
+            "text" : "Dashboard"
+        },
+        {
+            "text" : "Activity Lessons"
+        },
+        {
+            "text" : "Analytics"
+        },
+        {
+            "text" : "Activity Setting"
+        },
+        {
+            "text" : "Me Speak Setting"
+        },
+        {
+            "text" : "Account Setting"
+        }
+    ]
+
+}
